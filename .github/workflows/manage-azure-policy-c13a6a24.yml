@@ -1,0 +1,188 @@
+name: manage-azure-policy-c13a6a24
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Automation_to_Log_Analytics_workspace_Deploy-Diagnostics-AA/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Service_Bus_to_Log_Analytics_workspace_04d53d87-841c-4f23-8a5b-21564380b55e/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Log_Analytics_workspace_08ba64b8-738f-4918-9686-730d2ed79c7d/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Hub_to_Log_Analytics_workspace_1f6e93e8-6b31-41b1-83f6-36e449a42579/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Stream_Analytics_to_Log_Analytics_workspace_237e0f7e-b0e8-4ec4-ad46-8c12cb66d673/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Storage_Gen1_to_Log_Analytics_workspace_25763a0a-5783-4f14-969e-79d4933eb74b/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Event_Hub_3d5da587-71bd-41f5-ac95-dd3330c2d58d/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Analytics_to_Event_Hub_4daddf25-4823-43d4-88eb-2419eb6dcc08/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Service_Bus_to_Event_Hub_6b51af03-9277-49a9-a3f8-1c69c9ff7403/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_to_Event_Hub_a1dae6c7-13f3-48ea-a149-ff8442661f60/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_to_Log_Analytics_workspace_b889a06c-ec72-4b03-910a-cb169ee18721/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Key_Vault_to_Log_Analytics_workspace_bef3f64c-5290-43b7-85b0-9b254eef4c47/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Batch_Account_to_Log_Analytics_workspace_c84e5349-db6d-4769-805e-e14037dab9b5/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Network_Security_Groups_c9c29499-c1d1-4195-99bd-2ec9e3a9dc89/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Analytics_to_Log_Analytics_workspace_d56a5a7c-72d7-42bc-8ceb-3baf4c0eae03/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Batch_Account_to_Event_Hub_db51110f-0865-4a6e-b274-e2e07a5b2cd7/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Storage_Gen1_to_Event_Hub_e8d096bc-85de-4c5f-8cfb-857bd1b9d62d/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Stream_Analytics_to_Event_Hub_edf3780c-3d70-40fe-b17e-ab72013dafca/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Hub_to_Event_Hub_ef7b61ef-b8e4-4c91-8e78-6946c6b0023f/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Container_Instances_to_Log_Analytics_workspace_Deploy-Diagnostics-ACI/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Activity_Log_to_Log_Analytics_workspace_Deploy-Diagnostics-ActivityLog/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Container_Registry_to_Log_Analytics_workspace_Deploy-Diagnostics-ACR/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Kubernetes_Service_to_Log_Analytics_workspace_Deploy-Diagnostics-AKS/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Analysis_Services_to_Log_Analytics_workspace_Deploy-Diagnostics-AnalysisService/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_API_for_FHIR_to_Log_Analytics_workspace_Deploy-Diagnostics-ApiForFHIR/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_API_Management_to_Log_Analytics_workspace_Deploy-Diagnostics-APIMgmt/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Application_Gateway_to_Log_Analytics_workspace_Deploy-Diagnostics-ApplicationGateway/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Batch_to_Log_Analytics_workspace_Deploy-Diagnostics-Batch/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_CDN_Endpoint_to_Log_Analytics_workspace_Deploy-Diagnostics-CDNEndpoints/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Cognitive_Services_to_Log_Analytics_workspace_Deploy-Diagnostics-CognitiveServices/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Cosmos_DB_to_Log_Analytics_workspace_Deploy-Diagnostics-CosmosDB/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Databricks_to_Log_Analytics_workspace_Deploy-Diagnostics-Databricks/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Data_Explorer_Cluster_to_Log_Analytics_workspace_Deploy-Diagnostics-DataExplorerCluster/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Factory_to_Log_Analytics_workspace_Deploy-Diagnostics-DataFactory/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Data_Lake_Store_to_Log_Analytics_workspace_Deploy-Diagnostics-DataLakeStore/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Analytics_to_Log_Analytics_workspace_Deploy-Diagnostics-DLAnalytics/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Grid_subscriptions_to_Log_Analytics_workspace_Deploy-Diagnostics-EventGridSub/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Grid_System_Topic_to_Log_Analytics_workspace_Deploy-Diagnostics-EventGridSystemTopic/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Grid_Topic_to_Log_Analytics_workspace_Deploy-Diagnostics-EventGridTopic/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Hubs_to_Log_Analytics_workspace_Deploy-Diagnostics-EventHub/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_ExpressRoute_to_Log_Analytics_workspace_Deploy-Diagnostics-ExpressRoute/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Firewall_to_Log_Analytics_workspace_Deploy-Diagnostics-Firewall/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Front_Door_to_Log_Analytics_workspace_Deploy-Diagnostics-FrontDoor/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Function_App_to_Log_Analytics_workspace_Deploy-Diagnostics-Function/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_HDInsight_to_Log_Analytics_workspace_Deploy-Diagnostics-HDInsight/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_IoT_Hub_to_Log_Analytics_workspace_Deploy-Diagnostics-iotHub/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Key_Vault_to_Log_Analytics_workspace_Deploy-Diagnostics-KeyVault/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Load_Balancer_to_Log_Analytics_workspace_Deploy-Diagnostics-LoadBalancer/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_integration_service_environment_to_Log_Analytics_workspace_Deploy-Diagnostics-LogicAppsISE/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_Workflow_runtime_to_Log_Analytics_workspace_Deploy-Diagnostics-LogicAppsWF/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_MariaDB_to_Log_Analytics_workspace_Deploy-Diagnostics-MariaDB/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Media_Service_to_Log_Analytics_workspace_Deploy-Diagnostics-MediaService/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Machine_Learning_workspace_to_Log_Analytics_workspace_Deploy-Diagnostics-MlWorkspace/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Database_for_MySQL_to_Log_Analytics_workspace_Deploy-Diagnostics-MySQL/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Network_Security_Groups_to_Log_Analytics_workspace_Deploy-Diagnostics-NetworkSecurityGroups/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Network_Interfaces_to_Log_Analytics_workspace_Deploy-Diagnostics-NIC/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Database_for_PostgreSQL_to_Log_Analytics_workspace_Deploy-Diagnostics-PostgreSQL/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Power_BI_Embedded_to_Log_Analytics_workspace_Deploy-Diagnostics-PowerBIEmbedded/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Recovery_Services_vaults_to_Log_Analytics_workspace_Deploy-Diagnostics-RecoveryVault/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Redis_Cache_to_Log_Analytics_workspace_Deploy-Diagnostics-RedisCache/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Relay_to_Log_Analytics_workspace_Deploy-Diagnostics-Relay/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Log_Analytics_workspace_Deploy-Diagnostics-SearchServices/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Service_Bus_namespaces_to_Log_Analytics_workspace_Deploy-Diagnostics-ServiceBus/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SQL_Databases_to_Log_Analytics_workspace_Deploy-Diagnostics-SQLDBs/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SignalR_to_Log_Analytics_workspace_Deploy-Diagnostics-SignalR/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SQL_Elastic_Pools_to_Log_Analytics_workspace_Deploy-Diagnostics-SQLElasticPools/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SQL_Managed_Instances_to_Log_Analytics_workspace_Deploy-Diagnostics-SQLMI/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Stream_Analytics_to_Log_Analytics_workspace_Deploy-Diagnostics-StreamAnalytics/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Time_Series_Insights_to_Log_Analytics_workspace_Deploy-Diagnostics-TimeSeriesInsights/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Traffic_Manager_to_Log_Analytics_workspace_Deploy-Diagnostics-TrafficManager/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Virtual_Network_to_Log_Analytics_workspace_Deploy-Diagnostics-VirtualNetwork/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Virtual_Machines_to_Log_Analytics_workspace_Deploy-Diagnostics-VM/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Virtual_Machine_Scale_Sets_to_Log_Analytics_workspace_Deploy-Diagnostics-VMSS/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_VPN_Gateway_to_Log_Analytics_workspace_Deploy-Diagnostics-VNetGW/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_App_Service_Plan_to_Log_Analytics_workspace_Deploy-Diagnostics-WebServerFarm/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_App_Service_to_Log_Analytics_workspace_Deploy-Diagnostics-Website/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_WVD_Application_group_to_Log_Analytics_workspace_Deploy-Diagnostics-WVDAppGroup/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_WVD_Host_Pools_to_Log_Analytics_workspace_Deploy-Diagnostics-WVDHostPools/**'
+#      - 'Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_WVD_Workspace_to_Log_Analytics_workspace_Deploy-Diagnostics-WVDWorkspace/**'
+#      - .github/workflows/manage-azure-policy-c13a6a24.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_c13a6a24}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Automation_to_Log_Analytics_workspace_Deploy-Diagnostics-AA/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Service_Bus_to_Log_Analytics_workspace_04d53d87-841c-4f23-8a5b-21564380b55e/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Log_Analytics_workspace_08ba64b8-738f-4918-9686-730d2ed79c7d/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Hub_to_Log_Analytics_workspace_1f6e93e8-6b31-41b1-83f6-36e449a42579/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Stream_Analytics_to_Log_Analytics_workspace_237e0f7e-b0e8-4ec4-ad46-8c12cb66d673/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Storage_Gen1_to_Log_Analytics_workspace_25763a0a-5783-4f14-969e-79d4933eb74b/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Event_Hub_3d5da587-71bd-41f5-ac95-dd3330c2d58d/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Analytics_to_Event_Hub_4daddf25-4823-43d4-88eb-2419eb6dcc08/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Service_Bus_to_Event_Hub_6b51af03-9277-49a9-a3f8-1c69c9ff7403/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_to_Event_Hub_a1dae6c7-13f3-48ea-a149-ff8442661f60/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_to_Log_Analytics_workspace_b889a06c-ec72-4b03-910a-cb169ee18721/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Key_Vault_to_Log_Analytics_workspace_bef3f64c-5290-43b7-85b0-9b254eef4c47/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Batch_Account_to_Log_Analytics_workspace_c84e5349-db6d-4769-805e-e14037dab9b5/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Network_Security_Groups_c9c29499-c1d1-4195-99bd-2ec9e3a9dc89/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Analytics_to_Log_Analytics_workspace_d56a5a7c-72d7-42bc-8ceb-3baf4c0eae03/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Batch_Account_to_Event_Hub_db51110f-0865-4a6e-b274-e2e07a5b2cd7/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Storage_Gen1_to_Event_Hub_e8d096bc-85de-4c5f-8cfb-857bd1b9d62d/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Stream_Analytics_to_Event_Hub_edf3780c-3d70-40fe-b17e-ab72013dafca/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Hub_to_Event_Hub_ef7b61ef-b8e4-4c91-8e78-6946c6b0023f/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Container_Instances_to_Log_Analytics_workspace_Deploy-Diagnostics-ACI/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Activity_Log_to_Log_Analytics_workspace_Deploy-Diagnostics-ActivityLog/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Container_Registry_to_Log_Analytics_workspace_Deploy-Diagnostics-ACR/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Kubernetes_Service_to_Log_Analytics_workspace_Deploy-Diagnostics-AKS/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Analysis_Services_to_Log_Analytics_workspace_Deploy-Diagnostics-AnalysisService/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_API_for_FHIR_to_Log_Analytics_workspace_Deploy-Diagnostics-ApiForFHIR/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_API_Management_to_Log_Analytics_workspace_Deploy-Diagnostics-APIMgmt/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Application_Gateway_to_Log_Analytics_workspace_Deploy-Diagnostics-ApplicationGateway/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Batch_to_Log_Analytics_workspace_Deploy-Diagnostics-Batch/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_CDN_Endpoint_to_Log_Analytics_workspace_Deploy-Diagnostics-CDNEndpoints/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Cognitive_Services_to_Log_Analytics_workspace_Deploy-Diagnostics-CognitiveServices/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Cosmos_DB_to_Log_Analytics_workspace_Deploy-Diagnostics-CosmosDB/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Databricks_to_Log_Analytics_workspace_Deploy-Diagnostics-Databricks/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Data_Explorer_Cluster_to_Log_Analytics_workspace_Deploy-Diagnostics-DataExplorerCluster/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Factory_to_Log_Analytics_workspace_Deploy-Diagnostics-DataFactory/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Data_Lake_Store_to_Log_Analytics_workspace_Deploy-Diagnostics-DataLakeStore/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Data_Lake_Analytics_to_Log_Analytics_workspace_Deploy-Diagnostics-DLAnalytics/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Grid_subscriptions_to_Log_Analytics_workspace_Deploy-Diagnostics-EventGridSub/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Grid_System_Topic_to_Log_Analytics_workspace_Deploy-Diagnostics-EventGridSystemTopic/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Grid_Topic_to_Log_Analytics_workspace_Deploy-Diagnostics-EventGridTopic/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Event_Hubs_to_Log_Analytics_workspace_Deploy-Diagnostics-EventHub/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_ExpressRoute_to_Log_Analytics_workspace_Deploy-Diagnostics-ExpressRoute/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Firewall_to_Log_Analytics_workspace_Deploy-Diagnostics-Firewall/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Front_Door_to_Log_Analytics_workspace_Deploy-Diagnostics-FrontDoor/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Function_App_to_Log_Analytics_workspace_Deploy-Diagnostics-Function/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_HDInsight_to_Log_Analytics_workspace_Deploy-Diagnostics-HDInsight/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_IoT_Hub_to_Log_Analytics_workspace_Deploy-Diagnostics-iotHub/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Key_Vault_to_Log_Analytics_workspace_Deploy-Diagnostics-KeyVault/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Load_Balancer_to_Log_Analytics_workspace_Deploy-Diagnostics-LoadBalancer/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_integration_service_environment_to_Log_Analytics_workspace_Deploy-Diagnostics-LogicAppsISE/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Logic_Apps_Workflow_runtime_to_Log_Analytics_workspace_Deploy-Diagnostics-LogicAppsWF/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_MariaDB_to_Log_Analytics_workspace_Deploy-Diagnostics-MariaDB/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Azure_Media_Service_to_Log_Analytics_workspace_Deploy-Diagnostics-MediaService/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Machine_Learning_workspace_to_Log_Analytics_workspace_Deploy-Diagnostics-MlWorkspace/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Database_for_MySQL_to_Log_Analytics_workspace_Deploy-Diagnostics-MySQL/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Network_Security_Groups_to_Log_Analytics_workspace_Deploy-Diagnostics-NetworkSecurityGroups/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Network_Interfaces_to_Log_Analytics_workspace_Deploy-Diagnostics-NIC/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Database_for_PostgreSQL_to_Log_Analytics_workspace_Deploy-Diagnostics-PostgreSQL/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Power_BI_Embedded_to_Log_Analytics_workspace_Deploy-Diagnostics-PowerBIEmbedded/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Recovery_Services_vaults_to_Log_Analytics_workspace_Deploy-Diagnostics-RecoveryVault/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Redis_Cache_to_Log_Analytics_workspace_Deploy-Diagnostics-RedisCache/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Relay_to_Log_Analytics_workspace_Deploy-Diagnostics-Relay/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Log_Analytics_workspace_Deploy-Diagnostics-SearchServices/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Service_Bus_namespaces_to_Log_Analytics_workspace_Deploy-Diagnostics-ServiceBus/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SQL_Databases_to_Log_Analytics_workspace_Deploy-Diagnostics-SQLDBs/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SignalR_to_Log_Analytics_workspace_Deploy-Diagnostics-SignalR/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SQL_Elastic_Pools_to_Log_Analytics_workspace_Deploy-Diagnostics-SQLElasticPools/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_SQL_Managed_Instances_to_Log_Analytics_workspace_Deploy-Diagnostics-SQLMI/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Stream_Analytics_to_Log_Analytics_workspace_Deploy-Diagnostics-StreamAnalytics/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Time_Series_Insights_to_Log_Analytics_workspace_Deploy-Diagnostics-TimeSeriesInsights/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Traffic_Manager_to_Log_Analytics_workspace_Deploy-Diagnostics-TrafficManager/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Virtual_Network_to_Log_Analytics_workspace_Deploy-Diagnostics-VirtualNetwork/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Virtual_Machines_to_Log_Analytics_workspace_Deploy-Diagnostics-VM/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_Virtual_Machine_Scale_Sets_to_Log_Analytics_workspace_Deploy-Diagnostics-VMSS/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_VPN_Gateway_to_Log_Analytics_workspace_Deploy-Diagnostics-VNetGW/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_App_Service_Plan_to_Log_Analytics_workspace_Deploy-Diagnostics-WebServerFarm/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_App_Service_to_Log_Analytics_workspace_Deploy-Diagnostics-Website/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_WVD_Application_group_to_Log_Analytics_workspace_Deploy-Diagnostics-WVDAppGroup/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_WVD_Host_Pools_to_Log_Analytics_workspace_Deploy-Diagnostics-WVDHostPools/**
+          Monitor/Deploy_Diagnostic_Settings /policies/Deploy_Diagnostic_Settings_for_WVD_Workspace_to_Log_Analytics_workspace_Deploy-Diagnostics-WVDWorkspace/**
